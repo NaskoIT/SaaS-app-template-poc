@@ -6,5 +6,10 @@ namespace MultitenancyAppTemplate.Data.Platform
     public class PlatformDbContext : DbContext
     {
         public DbSet<Tenant> Tenants { get; set; }
+
+        public PlatformDbContext(DbContextOptions<PlatformDbContext> options)
+            : base(options)
+        { 
+        }
     }
 }

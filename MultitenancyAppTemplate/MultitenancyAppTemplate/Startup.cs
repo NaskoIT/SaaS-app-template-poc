@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MultitenancyAppTemplate.Data;
 using MultitenancyAppTemplate.Data.Platform;
+using MultitenancyAppTemplate.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,8 @@ namespace MultitenancyAppTemplate
             services.AddDbContext<PlatformDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IApplicationDbContextBuilder, ApplicationDbContextBuilder>();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
